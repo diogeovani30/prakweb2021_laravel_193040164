@@ -13,7 +13,7 @@ class Post extends Model
 
     // protected $fillable = ['title', 'excerpt', 'body'];
     protected $guarded = ['id'];
-    protected $with = ['category', 'author'];
+    protected $with = ['category', 'type', 'author'];
 
 
     public function scopeFilter($query, array $filters)
@@ -26,6 +26,11 @@ class Post extends Model
         $query->when($filters['category'] ?? false, function ($query, $category) {
             return $query->whereHas('category', function ($query) use ($category) {
                 $query->where('slug', $category);
+            });
+        });
+        $query->when($filters['type'] ?? false, function ($query, $type) {
+            return $query->whereHas('type', function ($query) use ($type) {
+                $query->where('slug', $type);
             });
         });
 
@@ -45,6 +50,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function author()
@@ -66,4 +75,8 @@ class Post extends Model
             ]
         ];
     }
+    // public function komentar()
+    // {
+    //     return $this->hasMany(Komentar::class);
+    // }
 }

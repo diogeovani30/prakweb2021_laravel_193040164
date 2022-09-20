@@ -13,8 +13,11 @@
 
     {{-- My Style --}}
     <link rel="stylesheet" href="/css/style.css">
-
-    <title>WPU Blog | {{ $title }}</title>
+    {{-- Todolist --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    @stack('css')
+    
+    <title> {{ $title }} | Operation Support  </title>
   </head>
   <body>
 
@@ -27,6 +30,7 @@
 
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-
+    <script src=:https://code.jquery.com/jquery-3.6.0.min.js></script>
+    @stack('js')
   </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="M.Dio Geovani">
-    <title>WPU Blog | Dashboard</title>
+    <title>Operation Support | EAL</title>
 
     
     <!-- Bootstrap core CSS -->

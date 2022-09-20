@@ -26,70 +26,130 @@
       </div>
     </div>
 
-      @if ($posts->count())
-      <div class="card mb-3">
-        @if($posts[0]->image)
-        <div  style="max-height:400px; overflow:hidden;">
-            <img class="img-fluid" src="{{ asset('storage/' . $posts[0]->image) }}" 
-            alt="{{ $posts[0]->category->name }}" class="img-fluid">
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Report</h6>
+
+          <div>
+            {{-- <div class="form-gorup">
+              <label for="">Name</label>
+              <option value="">Pilih</option>
+              @foreach ($posts as $post)
+              <select name="category_id" id="form-kontrol"><option value="{{ optional($post->author)->user_id }}" class="text-decoration-none">{{ optional($post->author)->name }}</option></select>
+             
+              @endforeach --}}
+
+            </div>
+          </div>
+          {{-- @foreach ($posts as $post)
+          <select>
+            <option>{{ $post->category->name }}</td></option>
+          </select>
+          @endforeach --}}
+
+          {{-- <div class="form-control">
+            <label>Report By:</label>
+            <select name="username" id="name">
+                @foreach($posts as $post)
+              
+                <option type="hidden" name="author" value="{{ request('author') }}"><a href="/posts?author={{ request('author') }}" class="text-decoration-none">{{ $post->author->name }}</a>
+                @endforeach
+                
+            </select> --}}
+
+            {{-- <select class="form-control" name="resoureceName">
+              @foreach ($posts as $post)
+              <option value="{{$post->type->name }}" 
+                
+                  @if ($post->type->name  == $post->type->name )
+                  {{'selected="selected"'}}
+                  @endif 
+                 >
+               {{$post->type->name }} </option>               
+             @endforeach    
         </div>
-        @else
-        <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}"
-        class="card-img-top" alt="{{ $posts[0]->category->name }}">
-      @endif   
-  
-      <div class="card-body text-center">
-        <h3 class="card-title"><a href="/posts/{{ $posts[0]->slug }}" class=" text-decoration-none text-dark">{{ $posts[0]->title}}</a></h3>
-         <p>
-          <small class="text-muted">
-          By. <a href="/posts?author={{ $posts[0]->author->username}}" class="text-decoration-none">{{ $posts[0]->author->name}}</a> in <a href="/posts?category={{
-          $posts[0]->category->slug }}" class="text-decoration-none "> {{$posts[0]->category->name }}</a> {{ $posts[0]->created_at->diffForHumans () }}
-          </small>
-        </p>
-        <p class="card-text">{{ $posts[0]->excerpt }}</p>
-        <a href="/posts/{{ $posts[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-        
-      </div>
-    </div>
 
-        
-    
-    <div class="container">
-      <div class="row">
-        @foreach ($posts->skip(1) as $post)
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="position-absolute px-3 py-2" style="background-color: rgba(0,0,0,0.7) "><a href="/posts?category=/{{$post->category->slug}}" class="text-white text-decoration-none">{{$post->category->name}}</a></div>
+              <option>Select Item</option> --}}
             
-            @if($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" 
-                        alt="{{ $post->category->name }}" class="img-fluid">
-                @else
-                      <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}" class="card-img-top" alt="{{ $post->category->name }}">
-                @endif
+              {{-- @foreach ($posts as $post)
+                <option value="{{ $post->id }}" {{ ( $post->id == $existingRecordId) ? 'selected' : '' }}> {{ $post->name }} </option>
+              @endforeach    </select> --}}
 
-            <div class="card-body">
-              <h5 class="card-title">{{ $post->title }}</h5>
-              <p>
-                <small class="text-muted">
-                By. <a href="/posts?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> {{ $post->created_at->diffForHumans () }}
-                </small>
-              </p>
-              <p class="card-text">{{ $post->excerpt }}</p>
-              <a href="/posts/{{ $post->slug }}" class="btn btn-primary">Read more</a>
+             
+
+
+
+            {{-- <label for="cars">Choose a Report:</label>
+            <select class="form-control m-bot15" name="post_id">
+              @if($posts->count() > 0)
+             @foreach($posts as $post)
+              <option value="{{  $post->author->username  }}"><a href="/posts?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a>
+             @endForeach
+             @else
+              No Record Found
+               @endif   
+           </select> --}}
+   
+        {{-- </div> --}}
+  
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="10%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Laporan</th>
+                          <th scope="col">PIC </th>
+                          <th scope="col">Progres </th>
+                          <th scope="col">Detail</th>
+                          <th scope="col">By</th>
+                        </tr>
+                    </thead>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        @endforeach
-      </div>
-    </div>
 
-    
+<!-- /.container-fluid -->
+      @foreach ($posts as $post)
+      <tr>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $post->title }}</td>
+        <td>{{ $post->category->name  }}</td>
+        <td>{{ $post->type->name }}</td>
+        <td>
+          <a href="/posts/{{ $post->slug }}" class="btn btn-info "><span data-feather="eye"></span></a> 
+        </td>
         
-    @else
-        <P class="text-center fs-4">No Post found</P>
-    @endif
+        <td>
+          <a href="/posts?author={{  optional($post->author)->username }}" class="text-decoration-none">{{ optional($post->author)->name }}</a> 
+        </td>
+      </tr>
+      @endforeach
+     
+    </tbody>
+  </table>
+</div>
+
+
 <div class="d-flex justify-content-end">
 {{ $posts->links() }}
 </div>
+
+
 @endsection
+
+

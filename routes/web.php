@@ -2,13 +2,15 @@
 
 use App\Models\Category;
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\AdminCategoryController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\ForgotController;
+use App\Models\Type;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +46,16 @@ Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/categories', function () {
     return view('categories', [
-        'title' => 'Post Categories',
+        'title' => 'Jobdesk',
         'active' => 'categories',
         'categories' => Category::all()
+    ]);
+});
+Route::get('/types', function () {
+    return view('types', [
+        'title' => 'Types',
+        'active' => 'types',
+        'types' => Type::all()
     ]);
 });
 
@@ -57,6 +66,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
 
 
 Route::get('/dashboard', function () {
@@ -71,11 +81,11 @@ Route::resource('/dashboard/posts', DashboardPostController::class)
 
 
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+// Route::get('/dashboard/categories', [DashboardPostController::class])
+//     ->middleware('auth');
 
-
-
-
-
+// Route::resource('/dashboard/categories', AdminCategoryController::class)
+//     ->except('show')->middleware('admin');
 
 
 

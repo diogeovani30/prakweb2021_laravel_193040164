@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Post</h1>
+    <h1 class="h2">Edit Laporan</h1>
 </div>
 
 <div class="col-lg-8">
@@ -10,7 +10,7 @@
   @method('put')
   @csrf
   <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
+    <label for="title" class="form-label">Laporan</label>
     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" 
     required autofocus value="{{ old('title', $post->title) }}">
     @error('title')
@@ -30,7 +30,7 @@
     @enderror
   </div>
   <div class="mb-3">
-    <label for="category" class="form-label">Category</label>
+    <label for="category" class="form-label">PIC</label>
     <select class="form-select" name="category_id">
         @foreach($categories as $category)
           @if(old('category_id', $post->category_id) == $category->id)
@@ -43,6 +43,19 @@
   </div>
 
   <div class="mb-3">
+    <label for="type" class="form-label">Type</label>
+    <select class="form-select" name="type_id">
+      @foreach ($types as $type)       
+      @if(old('type_id') == $type->id)
+      <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
+    @else
+      <option value="{{ $type->id }}" >{{ $type->name }}</option>
+    @endif
+      @endforeach
+    </select>
+  </div>
+
+  {{-- <div class="mb-3">
     <label for="image" class="form-label">Post Image</label>
     <input type="hidden" name="oldImage" value=" {{ $post->image }} ">
     @if($post->image)
@@ -56,11 +69,11 @@
         {{ $message }}
       </div> 
     @enderror
-  </div>
+  </div> --}}
 
 
   <div class="mb-3">
-    <label for="body" class="form-label">Body</label>
+    <label for="body" class="form-label">Pesan</label>
     @error('body')
       <p class="text-danger">
         {{ $message }}
@@ -69,7 +82,7 @@
     <input id="body" type="hidden" name="body" value=" {{ old('body', $post->body) }} ">
     <trix-editor input="body"></trix-editor>
   </div>
-  <button type="submit" class="btn btn-primary">Update Post</button>
+  <button type="submit" class="btn btn-primary">Update Laporan</button>
 </form>
 </div>
 

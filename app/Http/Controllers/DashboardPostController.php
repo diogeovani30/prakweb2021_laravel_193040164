@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
@@ -32,7 +33,8 @@ class DashboardPostController extends Controller
     public function create()
     {
         return view('dashboard.posts.create', [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'types' => Type::all()
         ]);
     }
 
@@ -49,7 +51,8 @@ class DashboardPostController extends Controller
             'title' => 'required|max:255',
             'slug'  => 'required|unique:posts',
             'category_id' => 'required',
-            'image' => 'image|file|max:5120',
+            'type_id' => 'required',
+            // 'image' => 'image|file|max:5120',
             'body' => 'required'
         ]);
 
@@ -86,7 +89,8 @@ class DashboardPostController extends Controller
     {
         return view('dashboard.posts.edit', [
             'post' => $post,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'types' => Type::all()
         ]);
     }
 
@@ -102,7 +106,8 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required',
-            'image' => 'image|file|max:5120',
+            'type_id' => 'required',
+            // 'image' => 'image|file|max:5120',
             'body' => 'required'
         ];
 
@@ -112,13 +117,13 @@ class DashboardPostController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if ($request->file('image')) {
-            if ($request->oldImage) {
-                Storage::delete($request->oldImage);
-            }
+        // if ($request->file('image')) {
+        //     if ($request->oldImage) {
+        //         Storage::delete($request->oldImage);
+        //     }
 
-            $validatedData['image'] = $request->file('image')->store('post-images');
-        }
+        //     $validatedData['image'] = $request->file('image')->store('post-images');
+        // }
 
 
         $validatedData['user_id'] = auth()->user()->id;

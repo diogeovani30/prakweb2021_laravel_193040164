@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Type;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,26 +37,102 @@ class DatabaseSeeder extends Seeder
 
         // ]);
 
-        User::factory(3)->create();
-
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'web-programming'
-        ]);
-
-        Category::create([
-            'name' => 'Web Design',
-            'slug' => 'web-design'
-        ]);
-
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
-        ]);
-
-
-
         Post::factory(20)->create();
+        User::factory(20)->create();
+
+
+        Category::create([
+            'name' => 'Pr Monitoring',
+            'slug' => 'pr-monitoring'
+        ]);
+
+        Category::create([
+            'name' => 'CC',
+            'slug' => 'cc'
+        ]);
+
+        Category::create([
+            'name' => 'SO',
+            'slug' => 'so'
+        ]);
+
+        Category::create([
+            'name' => 'PO/STO',
+            'slug' => 'po/sto'
+        ]);
+
+        Category::create([
+            'name' => 'Goods Return',
+            'slug' => 'goods-return'
+        ]);
+        Category::create([
+            'name' => 'Sales Return',
+            'slug' => 'sales-return'
+        ]);
+        Category::create([
+            'name' => 'Memo',
+            'slug' => 'memo'
+        ]);
+
+        Category::create([
+            'name' => 'Claimable',
+            'slug' => 'claimable'
+        ]);
+
+        Category::create([
+            'name' => 'Perjadin',
+            'slug' => 'perjadin'
+        ]);
+
+        Category::create([
+            'name' => 'Cash Advance',
+            'slug' => 'cash-advance'
+        ]);
+
+        Category::create([
+            'name' => 'Promotion and BB',
+            'slug' => 'promotion-and-bb'
+        ]);
+        Category::create([
+            'name' => 'RSP STP Creation',
+            'slug' => 'rsp-stp-creation'
+        ]);
+        Category::create([
+            'name' => 'B2B Pricing',
+            'slug' => 'b2b-pricing'
+        ]);
+        Category::create([
+            'name' => 'Stock Adjustment',
+            'slug' => 'stock-adjustment'
+        ]);
+        Category::create([
+            'name' => 'PIR',
+            'slug' => 'pir'
+        ]);
+
+        Type::create([
+            'name' => 'To Do',
+            'slug' => 'to do'
+        ]);
+
+        Type::create([
+            'name' => 'On Going',
+            'slug' => 'on Going'
+        ]);
+
+        Type::create([
+            'name' => 'Pending Requests',
+            'slug' => 'pending requests'
+        ]);
+        Type::create([
+            'name' => 'Done',
+            'slug' => 'done'
+        ]);
+
+
+
+
+        // Category::factory(10)->create();
 
         // Post::create([
         //     'title' => 'Judul Pertama',
